@@ -17,14 +17,22 @@
 makeCacheMatrix <- function(x = matrix(rbind(c(-1,2,3),c(-5,2,3),c(9,2,-3)), nrow=3, ncol=3)) {
 	inverseSqMat <- NULL
 
+	# Return the default square matrix
 	get <- function() x
+
+	# User of the makeCacheMatrix$set function can supply their own matrix
+	# Assign the user supplied matrix to this methods arg. and reset the inverse matrix value
 	set <- function(mat) {
 		x <<- mat
 		inverseSqMat <<- NULL
 	}
+
+	# Cache the computed inverted matrix
 	setInverse <- function(argInverseSqMat) {
 		inverseSqMat <<- argInverseSqMat
 	}
+	
+	# Return the inverted (cached if present) copy
 	getInverse <- function() inverseSqMat
 	 
 	list(get=get, set=set, setInverse=setInverse, getInverse=getInverse)
